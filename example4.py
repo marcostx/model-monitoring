@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 
 from evidently.dashboard import Dashboard
-from evidently.tabs import DriftTab, NumTargetDriftTab, RegressionPerformanceTab
+from evidently.tabs import DriftTab, NumTargetDriftTab, RegressionPerformanceTab, CatTargetDriftTab
 
 raw_data = pd.read_csv('day.csv', header = 0, sep = ',', parse_dates=['dteday'])
 
@@ -35,6 +35,6 @@ column_mapping['datetime'] = datetime
 column_mapping['numerical_features'] = numerical_features
 column_mapping['categorical_features'] = categorical_features
 
-dashboard = Dashboard(ref_data, prod_data, column_mapping=column_mapping, tabs=[RegressionPerformanceTab])
+dashboard = Dashboard(ref_data, prod_data, column_mapping=column_mapping, tabs=[RegressionPerformanceTab, CatTargetDriftTab])
 
 dashboard.save('reports/regression_perfomance_month.html')
